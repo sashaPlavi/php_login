@@ -1,4 +1,18 @@
 <?php
+require('lib/user_validator.php');
+$username = null;
+$email = null;
+
+if (isset($_POST['signup-submit'])) {
+  $validation = new User_validator($_POST);
+  $errors = $validation->validateForm();
+  $username = htmlspecialchars($_POST['username']);
+  $email = htmlspecialchars($_POST['email']);
+}
+
+?>
+
+<?php
 require 'header.php'
 ?>
 <main>
@@ -7,7 +21,7 @@ require 'header.php'
     <h1>Sugnup</h1>
     <div class="container  ">
 
-      <form action="inc/signup.php" method="post">
+      <form action="" <?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 
         <div class="input-field">
           <i class="material-icons prefix">account_circle</i>
@@ -15,6 +29,9 @@ require 'header.php'
           <input id="icon_prefix" type="text" name="username" class="validate" placeholder="Enter Username">
 
           <label for="icon_prefix">Username</label>
+          <div class="error">
+            <?php echo $errors['username'] ?? '';  ?>
+          </div>
         </div>
 
         <div class="input-field">
@@ -23,6 +40,9 @@ require 'header.php'
           <input id="icon_prefix" type="text" name="email" class="validate" placeholder="Enter Email">
 
           <label for="icon_prefix">Email</label>
+          <div class="error">
+            <?php echo $errors['email'] ?? '';  ?>
+          </div>
         </div>
 
         <div class="input-field">
@@ -31,6 +51,9 @@ require 'header.php'
           <input id="icon_prefix" type="password" name="password" class="validate" placeholder="Enter Password">
 
           <label for="icon_prefix">Password</label>
+          <div class="error">
+            <?php echo $errors['password'] ?? '';  ?>
+          </div>
         </div>
 
         <div class="input-field">
@@ -39,6 +62,9 @@ require 'header.php'
           <i class="material-icons prefix">lock_outline</i>
           <input id="icon_prefix" type="password" name="re-password" class="validate" placeholder="Repeat  password">
           <label for="icon_prefix">Password</label>
+          <div class="error">
+            <?php echo $errors['re-password'] ?? '';  ?>
+          </div>
         </div>
         <div class="center">
 
