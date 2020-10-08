@@ -1,5 +1,7 @@
 <?php
 require('lib/user_validator.php');
+require('./db/db.php');
+require('./db/models/users.php');
 $username = null;
 $email = null;
 
@@ -8,6 +10,10 @@ if (isset($_POST['signup-submit'])) {
   $errors = $validation->validateForm();
   $username = htmlspecialchars($_POST['username']);
   $email = htmlspecialchars($_POST['email']);
+
+  $password = 'blabla truc';
+
+  Users::SetUser($username, $email, $password, $mysqli);
 }
 
 ?>
@@ -21,7 +27,7 @@ require 'header.php'
     <h1>Sugnup</h1>
     <div class="container  ">
 
-      <form action="" <?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+      <form action=" <?php echo $_SERVER['PHP_SELF'] ?>" method="post">
 
         <div class="input-field">
           <i class="material-icons prefix">account_circle</i>

@@ -22,8 +22,8 @@
           brand logo
         </a>
         <ul id="nav-mobile" class="right hide-on-small-and-down">
-          <li> <a href="">Home</a></li>
-          <li><a href="">Portfolio</a></li>
+          <li> <a href="/inex">Home</a></li>
+
           <li><a href="signup.php">Signup</a></li>
           <li><a href="login.php">Login</a></li>
         </ul>
