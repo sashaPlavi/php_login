@@ -10,10 +10,15 @@ if (isset($_POST['signup-submit'])) {
   $errors = $validation->validateForm();
   $username = htmlspecialchars($_POST['username']);
   $email = htmlspecialchars($_POST['email']);
+  $password = htmlspecialchars($_POST['password']);
+  $repassword = htmlspecialchars($_POST['re-password']);
 
-  $password = 'blabla truc';
 
-  Users::SetUser($username, $email, $password, $mysqli);
+  $dbpassword = 'blabla truc';
+  if (!$errors) {
+
+    Users::SetUser($username, $email, $dbpassword, $mysqli);
+  }
 }
 
 ?>

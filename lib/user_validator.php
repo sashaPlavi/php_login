@@ -4,7 +4,7 @@ class User_validator
 {
   private $data;
   private $errors = [];
-  private static $filds = ['username', 'email',];
+  private static $filds = ['username', 'email', 'password', 're-password'];
 
   public function __construct($post_data)
   {
@@ -22,6 +22,8 @@ class User_validator
     }
     $this->validateEmail();
     $this->validateUsername();
+    $this->CheckPass();
+
     return $this->errors;
   }
   private function validateUsername()
@@ -45,6 +47,26 @@ class User_validator
 
       if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
         $this->addError('email', 'email is not valid');
+      }
+    }
+  }
+  private function CheckPass()
+  {
+    $pass = trim($this->data['password']);
+    $repass = trim($this->data['re-password']);
+    if (empty($pass) && empty($repass)) {
+      $this->addError('password', 'password can not be empty');
+    } else {
+
+      if ($pass != $repass) {
+        $this->addError('password', ' password must mach');
+      }
+
+      if (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $pass)) {
+        $this->addError('password', 'password must be betveen 6 and 12 characters long and alfanumeric');
+      }
+      if (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $repass)) {
+        $this->addError('re-password', ' re -password must be betveen 6 and 12 characters long and alfanumeric');
       }
     }
   }
