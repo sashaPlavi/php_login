@@ -58,8 +58,9 @@ class User_validator
       $this->addError('password', 'password can not be empty');
     } else {
 
-      if ($pass != $repass) {
-        $this->addError('password', ' password must mach');
+
+      if (strcasecmp($pass, $repass) != 0) {
+        $this->addError('password_match', ' password must mach');
       }
 
       if (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $pass)) {

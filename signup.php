@@ -14,10 +14,10 @@ if (isset($_POST['signup-submit'])) {
   $repassword = htmlspecialchars($_POST['re-password']);
 
 
-  $dbpassword = 'blabla truc';
+
   if (!$errors) {
 
-    Users::SetUser($username, $email, $dbpassword, $mysqli);
+    Users::SetUser($username, $email, $password, $mysqli);
   }
 }
 
@@ -42,6 +42,7 @@ require 'header.php'
           <label for="icon_prefix">Username</label>
           <div class="error">
             <?php echo $errors['username'] ?? '';  ?>
+            <?php echo $errors['username_taken'] ?? '';  ?>
           </div>
         </div>
 
@@ -64,6 +65,7 @@ require 'header.php'
           <label for="icon_prefix">Password</label>
           <div class="error">
             <?php echo $errors['password'] ?? '';  ?>
+            <?php echo $errors['password_match'] ?? '';  ?>
           </div>
         </div>
 
@@ -75,6 +77,7 @@ require 'header.php'
           <label for="icon_prefix">Password</label>
           <div class="error">
             <?php echo $errors['re-password'] ?? '';  ?>
+            <?php echo $errors['password_match'] ?? '';  ?>
           </div>
         </div>
         <div class="center">
