@@ -1,22 +1,17 @@
 <?php
 
-require('lib/user_validator.php');
-require('./db/db.php');
-require('./db/models/users.php');
+require('./controler/LoginCtrl.php');
+
 $username = null;
-$email = null;
+
 
 if (isset($_POST['login-submit'])) {
-  $validation = new User_validator($_POST);
-  $errors = $validation->validateLogin();
 
-  $email = htmlspecialchars($_POST['email']);
+  $login = new LoginCtrl($_POST);
+  $email = htmlspecialchars($_POST['username']);
   $password = htmlspecialchars($_POST['password']);
 
-  if (!$errors) {
-
-    Users::UserLogin($email, $password, $mysqli);
-  }
+  $login->validation();
 }
 
 ?>
@@ -38,7 +33,7 @@ require 'header.php'
         <div class="input-field">
           <i class="material-icons prefix">account_circle</i>
 
-          <input id="icon_prefix" type="text" name="email" class="validate" placeholder="Usrname/email">
+          <input id="icon_prefix" type="text" name="username" class="validate" placeholder="Usrname ">
 
           <label for="icon_prefix">Email</label>
           <div class="error">

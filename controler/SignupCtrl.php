@@ -3,7 +3,7 @@
 class SignupCtrl
 {
   private $data;
-  private $errors = [];
+
 
 
   public function __construct($post_data)

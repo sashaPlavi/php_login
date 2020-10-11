@@ -31,21 +31,7 @@ class User_validator
     return $this->errors;
   }
 
-  public function validateLogin()
-  {
-    $filds = ['email', 'password'];
-    foreach ($filds as $field) {
-      if (!array_key_exists($field, $this->data)) {
-        trigger_error("$field does not exist ");
-        return;
-      }
-    }
-    $this->validateEmail();
 
-    $this->CheckPass();
-
-    return $this->errors;
-  }
   private function validateUsername()
   {
     $val = trim($this->data['username']);
