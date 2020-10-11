@@ -17,15 +17,23 @@ class LoginCtrl
 
     require("$root/php_login/db/db.php");
     require("$root/php_login/db/models/users.php");
+    require './db/paswordhash.php';
 
     $username = htmlspecialchars($this->data['username']);
 
-    $password = htmlspecialchars($this->data['password']);
+    $passwordInput = htmlspecialchars($this->data['password']);
 
     $res = Users::getSingleUserByUsernameRes($username, $mysqli);
-    print_r($res);
+    $row = $res->fetch_assoc();
+    print_r($row['password']);
+    $passwordDb =  $row['password'];
     // if ($res->num_rows == 0) {
     //   return $errors['dbsearch'] = "there in no user with username $username";
     // }
+    if (crypt($passwordInput, $passwordDb) == $passwordDb) {
+      echo "Password verified!";
+    } else {
+      echo 'invalid pasword';
+    }
   }
 }
