@@ -4,7 +4,7 @@ class User_validator
 {
   private $data;
   private $errors = [];
-  private static $filds = ['username', 'email', 'password', 're-password'];
+
 
   public function __construct($post_data)
   {
@@ -12,11 +12,15 @@ class User_validator
   }
 
 
-  public function validateForm()
+  public function validateSubmit()
   {
-    foreach (self::$filds as $field) {
+    $filds = ['username', 'email', 'password', 're-password'];
+
+
+    foreach ($filds as $field) {
       if (!array_key_exists($field, $this->data)) {
         trigger_error("$field does not exist ");
+
         return;
       }
     }
@@ -26,9 +30,26 @@ class User_validator
 
     return $this->errors;
   }
+
+  public function validateLogin()
+  {
+    $filds = ['email', 'password'];
+    foreach ($filds as $field) {
+      if (!array_key_exists($field, $this->data)) {
+        trigger_error("$field does not exist ");
+        return;
+      }
+    }
+    $this->validateEmail();
+
+    $this->CheckPass();
+
+    return $this->errors;
+  }
   private function validateUsername()
   {
     $val = trim($this->data['username']);
+
     if (empty($val)) {
       $this->addError('username', 'user name can not be ampty');
     } else {

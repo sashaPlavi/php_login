@@ -1,24 +1,17 @@
 <?php
-require('lib/user_validator.php');
-require('./db/db.php');
-require('./db/models/users.php');
+
+require './controler/SignupCtrl.php';
+
 $username = null;
 $email = null;
 
 if (isset($_POST['signup-submit'])) {
-  $validation = new User_validator($_POST);
-  $errors = $validation->validateForm();
+  $signup = new SignupCtrl($_POST);
+  $errors = $signup->validation();
   $username = htmlspecialchars($_POST['username']);
   $email = htmlspecialchars($_POST['email']);
   $password = htmlspecialchars($_POST['password']);
   $repassword = htmlspecialchars($_POST['re-password']);
-
-
-
-  if (!$errors) {
-
-    Users::SetUser($username, $email, $password, $mysqli);
-  }
 }
 
 ?>
