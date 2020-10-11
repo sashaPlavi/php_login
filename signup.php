@@ -35,7 +35,7 @@ require 'header.php'
           <label for="icon_prefix">Username</label>
           <div class="error">
             <?php echo $errors['username'] ?? '';  ?>
-            <?php echo $errors['username_taken'] ?? '';  ?>
+            <?php echo $errors['dbsearch'] ?? '';  ?>
           </div>
         </div>
 

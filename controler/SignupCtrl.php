@@ -25,8 +25,14 @@ class SignupCtrl
     $password = htmlspecialchars($this->data['password']);
 
     if (!$errors) {
+      $res = Users::getSingleUserByUsername($username, $mysqli);
+      print_r($res);
+      if ($res->num_rows == 0) {
 
-      Users::SetUser($username, $email, $password, $mysqli);
+        Users::SetUser($username, $email, $password, $mysqli);
+      } else {
+        $errors['dbsearch'] = "there is already user with username $username";
+      }
     }
     return $errors;
   }
