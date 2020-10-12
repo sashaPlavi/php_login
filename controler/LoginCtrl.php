@@ -31,7 +31,11 @@ class LoginCtrl
     //   return $errors['dbsearch'] = "there in no user with username $username";
     // }
     if (crypt($passwordInput, $passwordDb) == $passwordDb) {
-      echo "Password verified!";
+      //echo "Password verified!";
+      session_start();
+      $_SESSION['userid'] = $row['userid'];
+      $_SESSION['username'] = $row['username'];
+      header("Location:index.php?login=success");
     } else {
       echo 'invalid pasword';
     }

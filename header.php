@@ -1,3 +1,6 @@
+<?php
+session_start()
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,10 +25,18 @@
           brand logo
         </a>
         <ul id="nav-mobile" class="right hide-on-small-and-down">
-          <li> <a href="index.php">Home</a></li>
 
-          <li><a href="signup.php">Signup</a></li>
-          <li><a href="login.php">Login</a></li>
+          <?php
+          if (isset($_SESSION['userid'])) {
+
+            echo   '  <li><a href="signout.php">Signout</a></li>';
+          } else {
+            echo  '<li><a href="signup.php">Signup</a></li>';
+            echo    '<li><a href="login.php">Login</a></li';
+          }
+          ?>
+
+
         </ul>
       </div>
 
