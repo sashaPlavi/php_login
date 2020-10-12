@@ -23,6 +23,9 @@ require 'header.php'
   <div class="container">
 
     <h1>Login</h1>
+    <div class="container center">
+      <h4>Please login</h4>
+    </div>
 
 
 
@@ -69,18 +72,7 @@ require 'header.php'
         <a class="btn waves-effect waves-light" href="signup.php">Signup</a>
       </div>
 
-      <div class="section">
 
-        <form action="inc/logout.php" method="post">
-
-
-
-          <button class="btn waves-effect waves-light" type="submit" name="logout-submit">Logout
-
-          </button>
-
-        </form>
-      </div>
 
     </div>
   </div>

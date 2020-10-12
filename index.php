@@ -2,17 +2,17 @@
 require 'header.php'
 ?>
 <main>
-  <div class="container">
+  <div class="container center">
 
     <h1>main</h1>
 
     <?php
     if (isset($_SESSION['userid'])) {
 
-      echo   '<p>you are loged in </p>';
+      echo   '<h3>you are loged in </h3>';
     } else {
 
-      echo '<p>you are loged out</p>';
+      echo '<h3>you are loged out</h3>';
     }
 
     ?>

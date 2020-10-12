@@ -26,10 +26,13 @@ class SignupCtrl
 
     if (!$errors) {
       $res = Users::getSingleUserByUsername($username, $mysqli);
-      print_r($res);
+      //print_r($res);
       if ($res->num_rows == 0) {
 
-        Users::SetUser($username, $email, $password, $mysqli);
+        $insert = Users::SetUser($username, $email, $password, $mysqli);
+        if ($insert) {
+          header('Location:login.php');
+        }
       } else {
         $errors['dbsearch'] = "there is already user with username $username";
       }
