@@ -72,6 +72,10 @@ require 'header.php'
         <a class="btn waves-effect waves-light" href="signup.php">Signup</a>
       </div>
 
+      <div class="section">
+        <a href="reset-password.php">Forgot your password?</a>
+      </div>
+
 
 
     </div>
