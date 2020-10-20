@@ -49,7 +49,7 @@ require 'header.php'
       <?php
       if (isset($_GET['reset'])) {
         if ($_GET['reset'] == 'success') {
-          echo '<p>Check your email </p>';
+          echo '<h4 class="center">Check your email </h4>';
         }
       }
       ?>

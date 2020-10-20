@@ -33,7 +33,7 @@ class ResetPwdCtrl
 
     $resDel = ResetPwd::DeleteReset($user_email, $mysqli);
     $resInsert = ResetPwd::setReset($user_email, $selector, $token, $expires, $mysqli);
-    print_r($resInsert);
+    // print_r($resInsert);
     //echo 'blabla';
 
 
@@ -49,7 +49,10 @@ class ResetPwdCtrl
     $headers .= "Content-type: text/html\r\n";
 
     // mail($to, $subject, $mesage, $headers);
-    //header("Location:create_new_pwd.php?reset=success")
+    if ($resInsert) {
+
+      header("Location:reset-password.php?reset=success");
+    }
 
     // $res = ResetPwd::DeleteReset($user_email, $mysqli);
   }
