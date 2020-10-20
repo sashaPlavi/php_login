@@ -40,12 +40,19 @@ require 'header.php'
           </div>
           <div class="center">
 
-            <button class="btn waves-effect waves-light" type="submit" name="reset-password">Reset
+            <button class="btn waves-effect waves-light" type="submit" name="reset-password">Recive new password by e-mail
 
             </button>
           </div>
         </div>
       </form>
+      <?php
+      if (isset($_GET['reset'])) {
+        if ($_GET['reset'] == 'success') {
+          echo '<p>Check your email </p>';
+        }
+      }
+      ?>
     </div>
 
 
