@@ -29,7 +29,9 @@ class ResetPwdCtrl
     $url = "http://localhost/php_login/create_new_pwd.php?selector=" . $selector . "&validator=" . $token;
     // header("Location:create_new_pwd.php?selector=" . $selector . "&validator=" . bin2hex($token));
     $expires = date("U") + 1800;
-    echo $expires;
+    // echo $expires . '<br>';
+    // echo $url . '<br>';
+    // echo 'blabla2';
 
     $resDel = ResetPwd::DeleteReset($user_email, $mysqli);
     $resInsert = ResetPwd::setReset($user_email, $selector, $token, $expires, $mysqli);
@@ -44,8 +46,8 @@ class ResetPwdCtrl
     $mesage .= '<p>Here is your password reset link</p></br>';
     $mesage .= '<p><a href="' . $url . '">' . $url . '</p>';
 
-    $headers = "From: sasa<sasa@sasa.com>\r\n";
-    $headers .= "Repaly-to: sasa@sasa.com\r\n";
+    $headers = "From:danka@saschas.mycpanel.rs>\r\n";
+    $headers .= "Repaly-to:danka@saschas.mycpanel.rs\r\n";
     $headers .= "Content-type: text/html\r\n";
 
     // mail($to, $subject, $mesage, $headers);

@@ -1,16 +1,17 @@
 <?php
+require 'header.php'
+
+?>
+<?php
 
 require './controler/ResetPwdCtrl.php';
 
 
 if (isset($_POST['reset-password'])) {
+  // echo 'bla1';
   $reset = new ResetPwdCtrl($_POST);
   $reset->MailSending();
 }
-
-?>
-<?php
-require 'header.php'
 
 ?>
 <main>
@@ -35,7 +36,7 @@ require 'header.php'
 
             <i class="material-icons prefix">email</i>
             <input id="icon_prefix" type="text" name="reset_email" class="validate" placeholder="Enter your mail">
-            <label for="icon_prefix">Reset your email</label>
+            <label for="icon_prefix">Reset your password</label>
 
           </div>
           <div class="center">
