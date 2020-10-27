@@ -9,8 +9,9 @@ require './controler/ResetPwdCtrl.php';
 
 if (isset($_POST['reset-password'])) {
   // echo 'bla1';
+
   $reset = new ResetPwdCtrl($_POST);
-  $reset->MailSending();
+  $errors = $reset->MailSending();
 }
 
 ?>
@@ -37,7 +38,9 @@ if (isset($_POST['reset-password'])) {
             <i class="material-icons prefix">email</i>
             <input id="icon_prefix" type="text" name="reset_email" class="validate" placeholder="Enter your mail">
             <label for="icon_prefix">Reset your password</label>
-
+            <div class="error">
+              <?php echo $errors['email'] ?? '';  ?>
+            </div>
           </div>
           <div class="center">
 

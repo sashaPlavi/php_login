@@ -30,7 +30,11 @@ class User_validator
 
     return $this->errors;
   }
-
+  public function validateresetEmail()
+  {
+    $this->validatereEmail();
+    return $this->errors;
+  }
 
   private function validateUsername()
   {
@@ -47,6 +51,19 @@ class User_validator
   private function validateEmail()
   {
     $val = trim($this->data['email']);
+    if (empty($val)) {
+      $this->addError('email', 'email can not be ampty');
+    } else {
+
+
+      if (!filter_var($val, FILTER_VALIDATE_EMAIL)) {
+        $this->addError('email', 'email is not valid');
+      }
+    }
+  }
+  private function validatereEmail()
+  {
+    $val = trim($this->data['reset_email']);
     if (empty($val)) {
       $this->addError('email', 'email can not be ampty');
     } else {
