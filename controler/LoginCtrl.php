@@ -35,7 +35,7 @@ class LoginCtrl
       session_start();
       $_SESSION['userid'] = $row['userid'];
       $_SESSION['username'] = $row['username'];
-      header("Location:index.php?login=success");
+      header("Location:index.php");
     } else {
       echo 'invalid pasword';
     }

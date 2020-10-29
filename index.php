@@ -9,7 +9,9 @@ require 'header.php'
     <?php
     if (isset($_SESSION['userid'])) {
 
-      echo   '<h3>you are loged in </h3>';
+      header('Location:images_form.php');
+
+      // echo   '<h3>you are loged in </h3>';
     } else {
 
       echo '<h3>you are loged out</h3>';
