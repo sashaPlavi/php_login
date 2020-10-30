@@ -21,7 +21,7 @@ session_start()
     <nav>
       <div class="nav-wrapper">
 
-        <a href="/#" class="brand-logo brand-text">
+        <a href="index.php" class="brand-logo brand-text">
           brand logo
         </a>
         <ul id="nav-mobile" class="right hide-on-small-and-down">
