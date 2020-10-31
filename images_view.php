@@ -12,19 +12,20 @@ $result =  Images::get_images($mysqli);
 
 
 <?php
-print_r($result->num_rows);
+//print_r($result->num_rows);
+var_dump($result);
 include('./header.php');
 
 
 if ($result->num_rows > 0) { ?>
 
 
-  <div class="galery_container">
+  <div class="conatiner">
     <?php while ($row = $result->fetch_assoc()) { ?>
-
-
-
       <img width="350" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" />
+
+
+
 
 
 

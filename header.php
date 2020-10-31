@@ -28,6 +28,10 @@ session_start()
 
           <?php
           if (isset($_SESSION['userid'])) {
+            if ($_SERVER['PHP_SELF'] == "/php_login/images_view.php") {
+
+              echo   '  <li><a href="images_form.php">Add Images</a></li>';
+            }
 
             echo   '  <li><a href="signout.php">Signout</a></li>';
           } else {

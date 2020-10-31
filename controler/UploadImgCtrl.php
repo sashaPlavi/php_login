@@ -41,18 +41,9 @@ class UploadingImgCtrl
     if (in_array($fileTrueExt, $alowed)) {
 
       if ($fileError === 0) {
-        if ($fileSize < 100000) {
-          // $fileNameNew = uniqid('', true) . "." . $fileTrueExt;
-          // $fileDestination = "uploads/" . $fileNameNew;
-          // var_dump($fileDestination);
-          // echo 'blalalalalalal';
-          // move_uploaded_file($fileTmpName, $fileDestination);
-          // header("Location:index.php?uploadsucces");
+        if ($fileSize < 1000000) {
 
           $insert = Images::set_images($mysqli, $imgContent);
-
-          //$db->query("INSERT into my_images (image, uploaded) VALUES ('$imgContent', NOW())");
-
           if ($insert) {
             $status = 'success';
             $statusMsg = "File uploaded successfully.";
