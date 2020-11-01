@@ -11,7 +11,9 @@ if (isset($_POST['login-submit'])) {
   $email = htmlspecialchars($_POST['username']);
   $password = htmlspecialchars($_POST['password']);
 
-  $login->validation();
+  $errors = $login->validation();
+  // $errors['dbsearch'] = "there in no user with username $username";
+  // var_dump($errors);
 }
 
 ?>
@@ -38,9 +40,9 @@ require 'header.php'
 
           <input id="icon_prefix" type="text" name="username" class="validate" placeholder="Usrname ">
 
-          <label for="icon_prefix">Email</label>
+          <label for="icon_prefix">Username</label>
           <div class="error">
-            <?php echo $errors['email'] ?? '';  ?>
+            <?php echo $errors['dbsearch'] ?? '';  ?>
 
           </div>
         </div>

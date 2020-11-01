@@ -19,12 +19,14 @@ require 'header.php';
 
 ?>
 
-<div class="section">
+<div class="section center">
+
   <?php
   $page = new PaginationCtrl;
   $page->paginate()
 
   ?>
+
 
 </div>
 

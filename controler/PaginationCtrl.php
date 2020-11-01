@@ -62,7 +62,7 @@ class PaginationCtrl
     while ($row = mysqli_fetch_array($res_data)) {
       $image = base64_encode($row['image']);
       //$imgView = "<img width='350' src='data:image/jpg;charset=utf8;base64,.$image.;/>";
-      echo "<img width='350' src='data:image/jpg;charset=utf8;base64," . $image . "' />";
+      echo "<img  style=width:350px;   src='data:image/jpg;charset=utf8;base64," . $image . "' />";
       // var_dump($image);
       // echo 'bla';
     }

@@ -3,7 +3,7 @@
 class LoginCtrl
 {
   private $data;
-  private $errors = [];
+
 
 
   public function __construct($post_data)
@@ -18,6 +18,7 @@ class LoginCtrl
     require("$root/php_login/db/db.php");
     require("$root/php_login/db/models/users.php");
     require './db/paswordhash.php';
+    $errors = [];
 
     $username = htmlspecialchars($this->data['username']);
 
@@ -25,19 +26,25 @@ class LoginCtrl
 
     $res = Users::getSingleUserByUsernameRes($username, $mysqli);
     $row = $res->fetch_assoc();
-    print_r($row['password']);
-    $passwordDb =  $row['password'];
-    // if ($res->num_rows == 0) {
-    //   return $errors['dbsearch'] = "there in no user with username $username";
-    // }
-    if (crypt($passwordInput, $passwordDb) == $passwordDb) {
-      //echo "Password verified!";
-      session_start();
-      $_SESSION['userid'] = $row['userid'];
-      $_SESSION['username'] = $row['username'];
-      header("Location:index.php");
+
+    if ($res->num_rows == 0) {
+
+      $errors['dbsearch'] = "there in no user with username $username";
     } else {
-      echo 'invalid pasword';
+
+
+      //print_r($row['password']);
+      $passwordDb =  $row['password'];
+      if (crypt($passwordInput, $passwordDb) == $passwordDb) {
+        echo "Password verified!";
+        session_start();
+        $_SESSION['userid'] = $row['userid'];
+        $_SESSION['username'] = $row['username'];
+        header("Location:index.php");
+      } else {
+        $errors['password'] = 'invalid pasword';
+      }
     }
+    return $errors;
   }
 }
