@@ -2,36 +2,36 @@
 // Include the database configuration file  
 require_once './db/db.php';
 require './db/models/images.php';
+require './controler/PaginationCtrl.php';
 
 // Get image data from database 
-$result =  Images::get_images($mysqli);
+//$result =  Images::get_images($mysqli);
 //print_r($result)
+// $page = new PaginationCtrl;
+// $page->paginate()
+
+
+?>
+<?php
+require 'header.php';
+
+
+
 ?>
 
+<div class="section">
+  <?php
+  $page = new PaginationCtrl;
+  $page->paginate()
 
+  ?>
 
-
-<?php
-//print_r($result->num_rows);
-var_dump($result);
-include('./header.php');
-
-
-if ($result->num_rows > 0) { ?>
-
-
-  <div class="conatiner">
-    <?php while ($row = $result->fetch_assoc()) { ?>
-      <img width="350" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" />
+</div>
 
 
 
 
 
 
-    <?php } ?>
-  </div>
 
-<?php } else { ?>
-  <p class="status error">Image(s) not found...</p>
-<?php } ?>
+<!-- <img width="350" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" /> -->

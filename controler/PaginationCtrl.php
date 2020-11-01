@@ -1,80 +1,71 @@
 <?php
 
-// class PaginationCtrl
-// {
+class PaginationCtrl
+{
 
 
-// public function paginate()
-// {
+  public function paginate()
+  {
+    $root = realpath($_SERVER["DOCUMENT_ROOT"]);
 
 
-// Find out how many items are in the table
-$total = $dbh->query('
-  SELECT
-  COUNT(*)
-  FROM
-  table
-  ')->fetchColumn();
+    require("$root/php_login/db/db.php");
+    require("$root/php_login/db/models/resetpwd.php");
 
-// How many items to list per page
-$limit = 20;
+    if (isset($_GET['pageno'])) {
+      $pageno = $_GET['pageno'];
+    } else {
+      $pageno = 1;
+    }
+    $no_of_records_per_page = 3;
 
-// How many pages will there be
-$pages = ceil($total / $limit);
 
-// What page are we currently on?
-$page = min($pages, filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, array(
-  'options' => array(
-    'default' => 1,
-    'min_range' => 1,
-  ),
-)));
+    $total_pages_sql = "SELECT COUNT(*) FROM my_images";
+    $result = mysqli_query($mysqli, $total_pages_sql);
+    $total_rows = mysqli_fetch_array($result)[0];
+    //var_dump($total_rows);
+    $total_pages = ceil($total_rows / $no_of_records_per_page);
+    // What page are we currently on?
+    $pageno = min($total_pages, filter_input(INPUT_GET, 'pageno', FILTER_VALIDATE_INT, array(
+      'options' => array(
+        'default'   => 1,
+        'min_range' => 1,
+      ),
+    )));
 
-// Calculate the offset for the query
-$offset = ($page - 1) * $limit;
+    // Calculate the offset for the query
+    $offset = ($pageno - 1) * $no_of_records_per_page;
 
-// Some information to display to the user
-$start = $offset + 1;
-$end = min(($offset + $limit), $total);
 
-// The "back" link
-$prevlink = ($page > 1) ? '<a href="?page=1" title="First page">&laquo;</a> <a href="?page=' . ($page - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
+    // Some information to display to the user
+    $start = $offset + 1;
+    $end = min(($offset + $no_of_records_per_page), $total_rows);
 
-// The "forward" link
-$nextlink = ($page < $pages) ? '<a href="?page=' . ($page + 1) . '" title="Next page">&rsaquo;</a> <a href="?page=' . $pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
-// Display the paging information
-echo '<div id="paging"><p>', $prevlink, ' Page ', $page, ' of ', $pages, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
-// Prepare the paged query
-$stmt = $dbh->prepare('
-  SELECT
-  *
-  FROM
-  table
-  ORDER BY
-  name
-  LIMIT
-  :limit
-  OFFSET
-  :offset
-  ');
 
-// Bind the query params
-$stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-$stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-$stmt->execute();
+    // The "back" link
+    $prevlink = ($pageno > 1) ? '<a href="?pageno=1" title="First page">&laquo;</a> <a href="?pageno=' . ($pageno - 1) . '" title="Previous page">&lsaquo;</a>' : '<span class="disabled">&laquo;</span> <span class="disabled">&lsaquo;</span>';
 
-// Do we have any results?
-if ($stmt->rowCount() > 0) {
-  // Define how we want to fetch the results
-  $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  $iterator = new IteratorIterator($stmt);
+    // The "forward" link
+    $nextlink = ($pageno < $total_pages) ? '<a href="?pageno=' . ($pageno + 1) . '" title="Next page">&rsaquo;</a> <a href="?pageno=' . $total_pages . '" title="Last page">&raquo;</a>' : '<span class="disabled">&rsaquo;</span> <span class="disabled">&raquo;</span>';
 
-  // Display the results
-  foreach ($iterator as $row) {
-    echo '<p>', $row['name'], '</p>';
+    // Display the paging information
+    echo '<div id="paging"><p>', $prevlink, ' Page ', $pageno, ' of ', $total_pages, ' pages, displaying ', $start, '-', $end, ' of ', $total_rows, ' results ', $nextlink, ' </p></div>';
+
+
+
+
+    //echo '<div id="paging"><p>', $prevlink, ' Page ', $pageno, ' of ', $total_pages_sql, ' pages, displaying ', $start, '-', $end, ' of ', $total, ' results ', $nextlink, ' </p></div>';
+
+
+    $sql = "SELECT * FROM my_images ORDER BY uploaded DESC LIMIT $offset, $no_of_records_per_page";
+    $res_data = mysqli_query($mysqli, $sql);
+    while ($row = mysqli_fetch_array($res_data)) {
+      $image = base64_encode($row['image']);
+      //$imgView = "<img width='350' src='data:image/jpg;charset=utf8;base64,.$image.;/>";
+      echo "<img width='350' src='data:image/jpg;charset=utf8;base64," . $image . "' />";
+      // var_dump($image);
+      // echo 'bla';
+    }
+    mysqli_close($mysqli);
   }
-} else {
-  echo '<p>No results could be displayed.</p>';
 }
- // }
-//}
