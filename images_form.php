@@ -18,13 +18,15 @@ require 'header.php'
 
 <div class="section">
 
+  <div class="images_form">
 
-  <form class="container" action=" <?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+    <form class="container" action=" <?php echo $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
 
-    <input type="file" name="file">
+      <input type="file" name="file">
 
-    <button type="submit" name="submit"> Upload</button>
-  </form>
+      <button type="submit" name="submit"> Upload</button>
+    </form>
+  </div>
 
 </div>
 <?php

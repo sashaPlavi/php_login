@@ -4,3 +4,12 @@
 .login {
   padding-top: 4rem;
 }
+.body {
+  background-color: aqua;
+}
+
+.images_form {
+  background-color: aqua;
+  display: grid;
+  justify-content: center;
+}
