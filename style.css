@@ -4,12 +4,17 @@
 .login {
   padding-top: 4rem;
 }
-.body {
-  background-color: aqua;
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image_box {
+  margin: 1rem;
 }
 
 .images_form {
-  background-color: aqua;
   display: grid;
   justify-content: center;
 }

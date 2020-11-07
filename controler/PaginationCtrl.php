@@ -59,13 +59,18 @@ class PaginationCtrl
 
     $sql = "SELECT * FROM my_images ORDER BY uploaded DESC LIMIT $offset, $no_of_records_per_page";
     $res_data = mysqli_query($mysqli, $sql);
-    while ($row = mysqli_fetch_array($res_data)) {
-      $image = base64_encode($row['image']);
-      //$imgView = "<img width='350' src='data:image/jpg;charset=utf8;base64,.$image.;/>";
-      echo "<img  style=width:350px;   src='data:image/jpg;charset=utf8;base64," . $image . "' />";
-      // var_dump($image);
-      // echo 'bla';
-    }
+    // while ($row = mysqli_fetch_array($res_data)) {
+    //  $image = base64_encode($row['image']);
+    //   $created_at = $row['uploaded'];
+    //$imgView = "<img width='350' src='data:image/jpg;charset=utf8;base64,.$image.;/>";
+    return $res_data;
+    //echo "<div class='image_box'>
+    // <img width='350'; src='data:image/jpg;charset=utf8;base64," . $image . "' />
+    // <p>" . $created_at . "</p>
+    // </div>";
+    // var_dump($image);
+    // echo 'bla';
+    // }
     mysqli_close($mysqli);
   }
 }

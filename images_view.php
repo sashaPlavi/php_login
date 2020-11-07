@@ -11,22 +11,38 @@ require './controler/PaginationCtrl.php';
 // $page->paginate()
 
 
+
+
 ?>
+
+
 <?php
 require 'header.php';
-
-
-
 ?>
 
-<div class="section center">
-
+<div class="center">
   <?php
+
   $page = new PaginationCtrl;
-  $page->paginate()
+  $data = $page->paginate();
+  ?>
+</div>
+
+
+
+<div class="  center flex">
+  <?php
+  while ($row = mysqli_fetch_array($data)) {
+    $image = base64_encode($row['image']);
+    $created_at = $row['uploaded'];
+    echo "<div class='image_box'>
+     <img width='350'; src='data:image/jpg;charset=utf8;base64," . $image . "' />
+     <p>" . $created_at . "</p>
+     </div>";
+  }
+
 
   ?>
-
 
 </div>
 
