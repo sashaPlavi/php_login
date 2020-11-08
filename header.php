@@ -20,11 +20,15 @@ session_start()
 
     <nav>
       <div class="nav-wrapper">
+        <div class="container">
 
-        <a href="index.php" class="brand-logo brand-text">
-          brand logo
-        </a>
+
+          <a href="index.php" class="brand-logo brand-text">
+            <i class="medium material-icons">import_contacts</i>
+          </a>
+        </div>
         <ul id="nav-mobile" class="right hide-on-small-and-down">
+
 
           <?php
           if (isset($_SESSION['userid'])) {
@@ -39,6 +43,7 @@ session_start()
             echo    '<li><a href="login.php">Login</a></li';
           }
           ?>
+
 
 
         </ul>
