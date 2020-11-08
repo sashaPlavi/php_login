@@ -12,9 +12,18 @@
 }
 .image_box {
   margin: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .images_form {
   display: grid;
   justify-content: center;
+}
+
+@media (max-width: 1120px) {
+  .image_box {
+    display: block;
+  }
 }
