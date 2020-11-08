@@ -27,7 +27,7 @@ session_start()
             <i class="medium material-icons">import_contacts</i>
           </a>
         </div>
-        <ul id="nav-mobile" class="right hide-on-small-and-down">
+        <ul id="nav-mobile" class="right">
 
 
           <?php

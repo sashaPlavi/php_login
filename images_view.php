@@ -21,6 +21,8 @@ require 'header.php';
 ?>
 
 <div class="center">
+
+  <h3>Images</h3>
   <?php
 
   $page = new PaginationCtrl;
@@ -30,14 +32,14 @@ require 'header.php';
 
 
 
-<div class="image_box">
+<div class="center">
   <?php
   while ($row = mysqli_fetch_array($data)) {
     $image = base64_encode($row['image']);
     $created_at = $row['uploaded'];
     echo "<div class='image_box'>
      <img width='350'; src='data:image/jpg;charset=utf8;base64," . $image . "' />
-     <p>" . $created_at . "</p>
+     <p>created at " . $created_at . "</p>
      </div>";
   }
 
