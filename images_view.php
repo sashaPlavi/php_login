@@ -30,7 +30,7 @@ require 'header.php';
 
 
 
-<div class="  center flex">
+<div class="image_box">
   <?php
   while ($row = mysqli_fetch_array($data)) {
     $image = base64_encode($row['image']);
