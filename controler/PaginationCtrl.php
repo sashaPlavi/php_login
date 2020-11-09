@@ -50,7 +50,7 @@ class PaginationCtrl
     $nextlink = ($pageno < $total_pages) ? '<a href="?pageno=' . ($pageno + 1) . '" title="Next page"> &rsaquo; </a> <a href="?pageno=' . $total_pages . '" title="Last page"> &raquo; </a>' : '<span class="disabled"> &rsaquo; </span> <span class="disabled">&raquo;</span>';
 
     // Display the paging information
-    echo '<div id="paging"><p>', $prevlink, ' Page ', $pageno, ' of ', $total_pages, ' pages, displaying ', $start, '-', $end, ' of ', $total_rows, ' results ', $nextlink, ' </p></div>';
+    echo '<div id="paging"><p>' . $prevlink . ' Page ' . $pageno . ' of ' . $total_pages . ' pages. displaying ' . $start . '-' . $end . ' of ' . $total_rows . ' results ' . $nextlink . ' </p></div>';
     $res_data = Images::getPaginateRes($mysqli, $offset, $no_of_records_per_page);
 
     return $res_data;

@@ -27,6 +27,7 @@ require 'header.php';
 
   $page = new PaginationCtrl;
   $data = $page->paginate();
+
   ?>
 </div>
 
